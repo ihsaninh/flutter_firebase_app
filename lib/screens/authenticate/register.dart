@@ -1,18 +1,19 @@
-import 'package:brew_crew/shared/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:brew_crew/services/auth.dart';
 import 'package:email_validator/email_validator.dart';
 
-class SignIn extends StatefulWidget {
+import 'package:brew_crew/services/auth.dart';
+import 'package:brew_crew/shared/constants.dart';
+
+class Register extends StatefulWidget {
 
   final Function toggleView;
-  SignIn({ this.toggleView });
+  Register({ this.toggleView });
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -21,11 +22,12 @@ class _SignInState extends State<SignIn> {
   String password = '';
   String error = '';
 
-  void signIn() async {
+  void registerUser() async {
     if (_formKey.currentState.validate()) {
-      dynamic result = await _auth.signInUser(email, password);
+      dynamic result = await _auth.registerUser(email, password);
+      print(result);
       if (result == null) {
-        setState(() => error = 'Failed to sign in');
+        setState(() => error = 'failed to register user');
       }
     }
   }
@@ -37,11 +39,11 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign In to Brew Crew'),
+        title: Text('Sign Up to Brew Crew'),
         actions: [
           FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Register'),
+            label: Text('Sign In'),
             onPressed: () {
               widget.toggleView();
             },
@@ -75,8 +77,8 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               RaisedButton(
                 color: Colors.pink[400],
-                child: Text('Sign In', style: TextStyle(color: Colors.white)),
-                onPressed: signIn,
+                child: Text('Register', style: TextStyle(color: Colors.white)),
+                onPressed: registerUser,
               ),
               SizedBox(height: 20.0),
               Text(
