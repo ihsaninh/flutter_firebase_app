@@ -59,8 +59,8 @@ class _SettingsFormState extends State<SettingsForm> {
                 Slider(
                   value: (_currentStrength ?? userdata.strength).toDouble(),
                   min: 100.0,
-                  activeColor: Colors.brown[_currentStrength ?? 100],
-                  inactiveColor: Colors.brown[_currentStrength ?? 100],
+                  activeColor: Colors.brown[_currentStrength ?? userdata.strength],
+                  inactiveColor: Colors.brown[_currentStrength ?? userdata.strength],
                   max: 900.0,
                   divisions: 8,
                   onChanged: (val) => setState(() => _currentStrength = val.round()),
