@@ -28,7 +28,6 @@ class _RegisterState extends State<Register> {
     if (_formKey.currentState.validate()) {
       setState(() => loading = true);
       dynamic result = await _auth.registerUser(email, password);
-      print(result);
       if (result == null) {
         setState(() {
           error = 'failed to register user';
